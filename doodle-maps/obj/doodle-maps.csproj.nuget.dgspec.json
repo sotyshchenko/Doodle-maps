@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Навчання\\Терм ІІІ\\Прикладні алгоритми та структури даних І\\doodle-maps\\doodle-maps\\doodle-maps.csproj": {}
+    "/Users/ostapturash/doodle-maps/doodle-maps/doodle-maps.csproj": {}
   },
   "projects": {
-    "D:\\Навчання\\Терм ІІІ\\Прикладні алгоритми та структури даних І\\doodle-maps\\doodle-maps\\doodle-maps.csproj": {
+    "/Users/ostapturash/doodle-maps/doodle-maps/doodle-maps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Навчання\\Терм ІІІ\\Прикладні алгоритми та структури даних І\\doodle-maps\\doodle-maps\\doodle-maps.csproj",
+        "projectUniqueName": "/Users/ostapturash/doodle-maps/doodle-maps/doodle-maps.csproj",
         "projectName": "doodle-maps",
-        "projectPath": "D:\\Навчання\\Терм ІІІ\\Прикладні алгоритми та структури даних І\\doodle-maps\\doodle-maps\\doodle-maps.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "D:\\Навчання\\Терм ІІІ\\Прикладні алгоритми та структури даних І\\doodle-maps\\doodle-maps\\obj\\",
+        "projectPath": "/Users/ostapturash/doodle-maps/doodle-maps/doodle-maps.csproj",
+        "packagesPath": "/Users/ostapturash/.nuget/packages/",
+        "outputPath": "/Users/ostapturash/doodle-maps/doodle-maps/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/ostapturash/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

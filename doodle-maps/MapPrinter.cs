@@ -35,10 +35,6 @@
     
                 Console.WriteLine("\n");
             }
-            public void Print(string[,] maze, List<Point> path)
-            {
-                // your code
-            }
         }
     }
 }
