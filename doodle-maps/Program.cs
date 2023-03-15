@@ -106,15 +106,15 @@ List<Point> SearchBFS(string[,] map, Point start, Point end)
 
 var generator = new MapGenerator(new MapGeneratorOptions()
 {
-    Height = 10,
-    Width = 15,
+    Height = 40,
+    Width = 40,
     Seed = 123
 });
 
 string[,] map = generator.Generate();
 
 Point start = new Point(0, 0);
-Point end = new Point(4, 2);
+Point end = new Point(0, 36);
 
 List<Point> path = SearchBFS(map, start, end);
 
