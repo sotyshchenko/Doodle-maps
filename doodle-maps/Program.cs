@@ -5,28 +5,6 @@ bool IsEqual(Point a, Point b)
     return a.Column == b.Column && a.Row == b.Row;
 }
 
-void PrintMapWithPath(string[,] map, List<Point> path)
-{
-    Point start = path[0];
-    Point end = path[^1];
-
-    foreach (Point p in path)
-    {
-        if (IsEqual(p, start))
-        {
-            map[p.Column, p.Row] = "A";
-        } else if (IsEqual(p, end))
-        {
-            map[p.Column, p.Row] = "B";
-        }
-        else
-        {
-            map[p.Column, p.Row] = ".";
-        }
-    }
-    
-    new MapPrinter().Print(map);
-}
 
 bool IsWall(string c)
 {
@@ -123,12 +101,11 @@ List<Point> AStarAlgorithm(string[,] map, Point start, Point end)
 {
     PriorityQueue<Point, int> frontier = new PriorityQueue<Point, int>();
     Dictionary<Point, Point?> cameFrom = new Dictionary<Point, Point?>();
-    Dictionary<Point, int> costSoFar = new Dictionary<Point, int>();
-    var manhattanDistance = Math.Abs(start.Column - end.Column) + Math.Abs(start.Row - end.Row);
+    Dictionary<Point, int> currentCost = new Dictionary<Point, int>();
 
     frontier.Enqueue(start, 0);
     cameFrom.Add(start, null);
-    costSoFar[start] = 0;
+    currentCost[start] = 0;
 
     while (frontier.Count > 0)
     {
@@ -141,12 +118,13 @@ List<Point> AStarAlgorithm(string[,] map, Point start, Point end)
         
         foreach (Point neighbour in GetNeighbours(map, cur))
         {
-            int newCost = costSoFar[cur] + 1;
-            if (!costSoFar.TryGetValue(neighbour, out _) || newCost < costSoFar[neighbour])
+            int newCost = currentCost[cur] + 1;
+            if (!currentCost.TryGetValue(neighbour, out _) || newCost < currentCost[neighbour])
             {
+                var manhattanDistance = Math.Abs(end.Column - neighbour.Column) + Math.Abs(end.Row - neighbour.Row);
                 nodesCheckedByAStar ++;
-                costSoFar[neighbour] = newCost;
-                cameFrom.Add(neighbour, cur);
+                currentCost[neighbour] = newCost;
+                cameFrom[neighbour] = cur;
                 int priority = newCost + manhattanDistance;
                 frontier.Enqueue(neighbour, priority);
                 
@@ -177,24 +155,43 @@ var generator = new MapGenerator(new MapGeneratorOptions()
     Width = 40,
     Seed = 123,
     Noise = 0.5f,
-    //AddTraffic = true,
-    //TrafficSeed = 1234    
+    AddTraffic = true,
+    TrafficSeed = 1234    
 });
 
-string[,] map = generator.Generate();
+
 
 Point start = new Point(0, 0);
-Point end = new Point(35, 35);
+Point end = new Point(39, 38);
 
-List<Point> pathDijkstra = DijkstraAlgorithm(map, start, end);
-List<Point> pathAStar = AStarAlgorithm(map, start, end);
 
-PrintMapWithPath(map, pathDijkstra); // for Dijkstra
-PrintMapWithPath(map, pathAStar); // for A*
+
+string[,] map1 = generator.Generate();
+string[,] map2 = (string[,])map1.Clone();
+map1[start.Column, start.Row] = " ";
+map1[end.Column, end.Row] = " ";
+
+
+// Dijkstra algorithm 
+
+Console.WriteLine("\nDIJKSTRA ALGORITHM\n");
+List<Point> pathDijkstra = DijkstraAlgorithm(map1, start, end);
+new MapPrinter().Print(map1, pathDijkstra);
+
+
+// Bonus task: A* algorithm
+
+Console.WriteLine("\nA* ALGORITHM\n");
+List<Point> pathAStar = AStarAlgorithm(map2, start, end);
+new MapPrinter().Print(map2, pathAStar);
+
+
+// Bonus task: Comparison
+
+Console.WriteLine("\nCOMPARISON");
 
 Console.WriteLine($"\nDijkstra algorithm has checked {nodesCheckedByDijkstra} nodes.  " +
                   $"\nA* algorithm has checked {nodesCheckedByAStar} nodes");
 
 Console.WriteLine($"\nAccording to Dijkstra algorithm the lenght of the path is {pathLengthByDijkstra}." +
                   $"\nAccording to A* algorithm the lenght of the path is {pathLengthByAStar}.");
-                  
